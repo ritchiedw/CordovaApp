@@ -19,8 +19,10 @@
 
 	<div role="main" class="ui-content">
 		<form>
-            <label for='text-1'>Text Input</label>
-            <input type='text' name='text-1' id='text-1' value=''>
+            <label for='text-1'>Base Currency</label>
+            <input type='text' name='text-1' id='text-1' value='GBP'>
+			<label for='text-2'>Target Currency</label>
+            <input type='text' name='text-2' id='text-2' value='EUR'>
             <input type="button" value="Press Me" id="pressme">
         </form>
         <div id='div1'>ding dong</div>
@@ -37,8 +39,11 @@
 
     $("#pressme").on('click', function(){
         //alert("hello world");
-        var inputText = $('#text-1').val();
-        $.ajax({url: "http://api.fixer.io/latest", 
+        var baseCurr = $('#text-1').val();
+		var targetCurr = $('#text-2').val();
+		$url = "http://api.fixer.io/latest?symbols=" + baseCurr +"," + targetCurr;
+		
+        $.ajax({url: $url, 
             success: function(result){
                 $("#div1").html(result.base);
                 $("#div2").html(result.date);
